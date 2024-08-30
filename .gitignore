@@ -1,5 +1,6 @@
 # .gitignore for Python projects
-
+# .gitignore virtual environment
+myenv/
 # Python bytecode
 *.py[cod]
 __pycache__/
