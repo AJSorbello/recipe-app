@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ recipe.name }}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <header>
+      <h1>{{ recipe.name }}</h1>
+    </header>
+    <div class="welcome-container recipe-details">
+      <!-- Image Display -->
+      <div class="image-wrapper">
+        {% if recipe.image %}
+        <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" />
+        {% else %}
+        <img
+          src="{% static 'default_recipe_image.jpg' %}"
+          alt="Default Image" />
+        {% endif %}
+      </div>
+
+      <!-- Centered Cooking Time and Difficulty -->
+      <div class="recipe-meta">
+        <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+        <p>Difficulty: {{ recipe.difficulty }}</p>
+      </div>
+
+      <!-- Ingredients Container -->
+      <div class="ingredients-container">
+        <h3>Ingredients:</h3>
+        <ul>
+          {% for ingredient in recipe.ingredient_set.all %}
+          <li class="ingredient-item">
+            <div class="ingredient-wrapper">
+              <div class="ingredient-name-container">{{ ingredient.name }}</div>
+              <div class="ingredient-quantity-unit-container">
+                {{ ingredient.quantity }} {{ ingredient.unit }}
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <h3>Instructions:</h3>
+      <p>{{ recipe.instructions }}</p>
+
+      <!-- Back to All Recipes Button -->
+      <div class="back-button-container">
+        <a href="{% url 'recipe:recipe_list' %}" class="back-button"
+          >Back to All Recipes</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

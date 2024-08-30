@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to My Recipe App</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <div class="welcome-container">
+      <header>
+        <h1>Welcome to My Recipe App</h1>
+      </header>
+      <main>
+        <section>
+          <p>Discover and share amazing recipes from around the world!</p>
+          <a href="{% url 'recipe:recipe_list' %}" class="btn">View Recipes</a>
+        </section>
+      </main>
+      <footer>
+        <p>&copy; 2024 My Recipe App. All rights reserved.</p>
+      </footer>
+    </div>
+  </body>
+</html>

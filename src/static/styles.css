@@ -1,0 +1,335 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('/static/site_images/welcome.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure the body takes up the full height of the viewport */
+}
+
+.welcome-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-container header {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.welcome-container header h1 {
+    color: #ff7f50;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+main section p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+main section .btn {
+    background-color: #ff7f50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+main section .btn:hover {
+    background-color: #cc5200;
+}
+
+footer p {
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.recipe-details {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 120px; /* Add top padding to clear the fixed header */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-details .image-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.recipe-details img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.recipe-details h2, .recipe-details h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.recipe-details p, .recipe-details ul {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.recipe-details ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+header {
+    width: 100%;
+    background-color: #ff7f50;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it stays on top of other content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+header h1 {
+    color: white;
+    font-size: 2.5em;
+    margin: 0;
+}
+
+/* Grid container for the recipe cards */
+.recipes-list {
+    display: flex;
+    flex-direction: column; /* Stack recipes vertically */
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 600px; /* Center column width */
+    margin: 120px auto 0; /* Center the list on the page, with top margin for header */
+}
+
+/* Individual recipe card styling */
+.recipe-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.2s;
+    width: 100%;
+}
+
+.recipe-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Wrapper for the image to ensure consistent sizing */
+.recipe-card .image-wrapper {
+    width: 100%;
+    height: 300px; /* Fixed height for all images */
+    overflow: hidden;
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 100%; /* Ensure the image fills the wrapper */
+    object-fit: cover; /* Maintain aspect ratio and cover the area */
+}
+
+/* Styling for the recipe title */
+.recipe-card h3 {
+    margin: 15px 0;
+    padding: 0 10px;
+    font-size: 1.2em;
+}
+
+/* Styling for the recipe link */
+.recipe-card a {
+    display: block;
+    text-decoration: none;
+    color: #ff7f50;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.back-button-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #ff7f50;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover {
+    background-color: #cc5200;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.view-recipe-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.view-recipe-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #ff7f50;
+    color: white !important; /* Force the text to be white in all states */
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.view-recipe-button:hover {
+    background-color: #cc5200;
+    color: white !important; /* Ensure text remains white on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.recipe-meta {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.ingredients-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque background for better readability */
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow for more visibility */
+    max-width: 800px; /* Optional: Set a max-width for the container */
+    margin-left: auto;
+    margin-right: auto; /* Center the container horizontally */
+}
+
+.ingredients-container h3 {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    color: #333;
+    text-align: center; /* Center the title */
+}
+
+.ingredients-container ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding-left: 0; /* Remove padding since we don't need bullets */
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+}
+.ingredient-name-container {
+    font-size: 1.2em;
+    font-weight: bold;
+    flex-grow: 2; /* Make the name container take more space */
+    text-align: left; /* Align text to the left */
+    margin-right: 10px; /* Space between name and quantity/unit */
+}
+
+.ingredient-quantity-unit-container {
+    font-size: 1.1em;
+    flex-grow: 1; /* Allow this container to take less space */
+    text-align: right; /* Align text to the right */
+}
+.ingredient-item {
+    margin-bottom: 20px; /* Space between each ingredient */
+    padding-left: 0; /* Align to the left edge */
+}
+.ingredient-wrapper {
+    background-color: #f9f9f9; /* Light background for the ingredient wrapper */
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    margin: 0 20px 10px 20px; /* Add left and right margin for inner spacing */
+    display: flex; /* Flexbox to align name and quantity/unit containers */
+    justify-content: space-between; /* Space out the name and quantity/unit */
+}
+
+.ingredient-details {
+    font-size: 1.1em;
+    text-align: center; /* Center the text */
+    font-weight: bold;
+}
+
+.ingredient-name,
+.ingredient-quantity,
+.ingredient-unit {
+    margin-bottom: 5px;
+    font-weight: normal;
+    flex-basis: 100%; /* Each element takes full width on small screens */
+    text-align: center; /* Center the text */
+}
+
+.ingredient-name {
+    font-weight: bold; /* Make the name stand out */
+    font-size: 1.2em;
+}
+
+@media (min-width: 600px) {
+    .ingredient-quantity,
+    .ingredient-unit,
+    .ingredient-name {
+        flex-basis: auto; /* Revert to auto width on larger screens */
+        text-align: left; /* Align text to the left on larger screens */
+    }
+}
+
+
+.ingredient-quantity::before {
+    content: "Quantity: ";
+}
+
+.ingredient-unit::before {
+    content: "Unit: ";
+}
+
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+h3 {
+    font-size: 1.5em;
+    color: #ff7f50;
+    margin-bottom: 15px;
+}

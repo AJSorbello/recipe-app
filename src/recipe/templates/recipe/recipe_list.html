@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Recipes</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <header>
+      <h1>All Recipes</h1>
+    </header>
+    <div class="recipes-list">
+      {% for recipe in recipes %}
+      <div class="recipe-card">
+        <div class="image-wrapper">
+          {% if recipe.image %}
+          <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" />
+          {% else %}
+          <img
+            src="{% static 'default_recipe_image.jpg' %}"
+            alt="Default Image" />
+          {% endif %}
+        </div>
+        <h3>{{ recipe.name }}</h3>
+        <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+        <p>Difficulty: {{ recipe.difficulty }}</p>
+        <p>Description: {{ recipe.description|truncatewords:20 }}</p>
+        <div class="view-recipe-button-container">
+          <a
+            href="{% url 'recipe:recipe_detail' recipe.pk %}"
+            class="view-recipe-button"
+            >View Recipe</a
+          >
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
