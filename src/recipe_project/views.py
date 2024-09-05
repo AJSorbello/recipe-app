@@ -28,4 +28,7 @@ def login_view(request):
 @login_required
 def logout_view(request):
     logout(request)
-    return redirect("recipe:home")  # Ensure this URL pattern exists
+    return redirect("logout_success")  # Ensure this URL pattern exists
+
+def logout_success_view(request):
+    return render(request, 'auth/success.html')

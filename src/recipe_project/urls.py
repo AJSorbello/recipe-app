@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from recipe_project.views import login_view, logout_view
+from recipe_project.views import login_view, logout_view, logout_success_view
 from recipe.views import home  # Import the home view
 
 urlpatterns = [
@@ -25,5 +25,6 @@ urlpatterns = [
     path('recipe/', include('recipe.urls')),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path('logout_success/', logout_success_view, name='logout_success'),  # Add the logout success URL pattern
     path('', home, name='home'),  # Add the root URL pattern
 ]
