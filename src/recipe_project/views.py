@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 def login_view(request):
     error_message = None
@@ -14,7 +15,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("recipe:home")  # Use the correct namespace 'recipe'
+                return redirect("recipe:recipe_list")  # Use the correct namespace 'recipe'
         else:
             error_message = "ooops.. something went wrong"
 
@@ -24,6 +25,7 @@ def login_view(request):
     }
     return render(request, "auth/login.html", context)
 
+@login_required
 def logout_view(request):
     logout(request)
-    return redirect("recipe:login")  # Ensure this URL pattern exists
+    return redirect("recipe:home")  # Ensure this URL pattern exists
