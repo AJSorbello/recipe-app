@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Recipes</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <header>
+      <h1>All Recipes</h1>
+      <nav>
+        <ul>
+          <a href="{% url 'recipe:home' %}">Home</a>
+          {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+
+    <div class="recipes-list">
+    <div class="container mt-5">
+      <div class="card-search">
+          <h1>Search for Recipes</h1>
+          <hr>
+          <form action="" method="POST">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+      </div>
+
+      <div class="card-body">
+        {% if error_message %}
+          <div class="alert alert-danger mt-3">{{ error_message }}</div>
+        {% endif %}
+        {% if recipes_df %}
+          <h2>Search Results</h2>
+          {{ recipes_df|safe }}
+          <br>
+          <img src="data:image/png;base64,{{ chart|safe }}">
+        {% else %}
+          <h3>No data</h3>
+        {% endif %}
+      </div>
+
+        {% for recipe in recipes %}
+          <div class="recipe-card">
+            <div class="image-wrapper">
+              {% if recipe.image %}
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" />
+              {% else %}
+                <img src="{% static 'default_recipe_image.jpg' %}" alt="Default Image" />
+              {% endif %}
+            </div>
+            <h3>{{ recipe.name }}</h3>
+            <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+            <p>Difficulty: {{ recipe.difficulty }}</p>
+            <p>Description: {{ recipe.description|truncatewords:20 }}</p>
+            <div class="view-recipe-button-container">
+              <a href="{% url 'recipe:recipe_detail' recipe.pk %}" class="view-recipe-button">View Recipe</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

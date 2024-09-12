@@ -22,9 +22,9 @@ from recipe.views import home  # Import the home view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('recipe/', include('recipe.urls')),
+    path('', home, name='home'),  # Add the home view to the URL patterns
+    path('recipes/', include('recipe.urls')),  # Include the URLs from the recipe app
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('logout_success/', logout_success_view, name='logout_success'),  # Add the logout success URL pattern
-    path('', home, name='home'),  # Add the root URL pattern
 ]

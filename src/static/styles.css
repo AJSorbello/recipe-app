@@ -9,7 +9,50 @@ body {
     align-items: center;
     min-height: 100vh; /* Ensure the body takes up the full height of the viewport */
 }
+header {
+    width: 100%;
+    background-color: #ff7f50;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it stays on top of other content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
+header h1 {
+    color: white;
+    font-size: 2.5em;
+    margin: 0;
+}
+/* Center the search bar */
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px; /* Fixed margin to ensure the search bar is below the header */
+    margin-bottom: 20px;
+}
+
+.search-form {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Center the search bar */
+.card-search {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 120px; /* Fixed margin to ensure the search bar is below the header */
+    margin-bottom: 20px;
+}
 .welcome-container {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
@@ -94,24 +137,6 @@ footer p {
     padding-left: 20px;
 }
 
-header {
-    width: 100%;
-    background-color: #ff7f50;
-    padding: 20px;
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000; /* Ensure it stays on top of other content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
-}
-
-header h1 {
-    color: white;
-    font-size: 2.5em;
-    margin: 0;
-}
 
 /* Grid container for the recipe cards */
 .recipes-list {
@@ -121,7 +146,7 @@ header h1 {
     gap: 20px;
     padding: 20px;
     max-width: 600px; /* Center column width */
-    margin: 120px auto 0; /* Center the list on the page, with top margin for header */
+    margin: 0 auto; /* Center the list on the page, with top margin for header */
 }
 
 /* Individual recipe card styling */
@@ -131,8 +156,6 @@ header h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
-    transition: transform 0.2s;
-    width: 100%;
 }
 
 .recipe-card:hover {
