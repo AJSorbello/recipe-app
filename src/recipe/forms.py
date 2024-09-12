@@ -6,7 +6,7 @@ CHART_CHOICES = (
     ('#3', 'Line chart')
 )
 
-# define class-based Form imported from Django forms
-class RecipeSearchForm(forms.Form): 
-    recipe_title = forms.CharField(max_length=120)
-    chart_type = forms.ChoiceField(choices=CHART_CHOICES)
+class RecipeSearchForm(forms.Form):
+    recipe_title = forms.CharField(required=False, label='Recipe Title')
+    chart_type = forms.ChoiceField(choices=[('#1', 'Bar'), ('#2', 'Pie'), ('#3', 'Line')], required=False, label='Chart Type')
+    show_all = forms.BooleanField(required=False, label='Show All')
