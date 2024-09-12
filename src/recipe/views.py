@@ -19,6 +19,11 @@ def recipe_list(request):
     chart = None
     recipes = Recipe.objects.all()  # Default to all recipes
 
+    # Fetch all recipes for the chart
+    all_recipes = Recipe.objects.all()
+    all_recipe_df = pd.DataFrame(list(all_recipes.values()))
+    all_recipe_df['name'] = all_recipe_df['id'].apply(get_recipe_from_id)
+
     if request.method == 'POST':
         recipe_title = request.POST.get('recipe_title')
         chart_type = request.POST.get('chart_type')
@@ -30,16 +35,16 @@ def recipe_list(request):
         if qs.exists():
             recipes = qs  # Update the recipes variable to use the filtered queryset
             recipe_df = pd.DataFrame(list(qs.values()))
-            print(f"DataFrame: {recipe_df}")
+            print(f"DataFrame: {recipe_df[['id', 'name', 'cooking_time', 'difficulty']]}")
 
             # Process DataFrame
             recipe_df['name'] = recipe_df['id'].apply(get_recipe_from_id)
             recipe_df_html = recipe_df.to_html(index=False, columns=['id', 'name', 'cooking_time', 'difficulty'])
             print(f"DataFrame HTML: {recipe_df_html}")
 
-            # Generate chart
-            chart = get_chart(chart_type, recipe_df, labels=recipe_df['name'].values)
-            print(f"Generated Chart: {chart}")
+    # Generate chart with all recipes
+    chart = get_chart(chart_type, all_recipe_df, labels=all_recipe_df['name'].tolist(), cooking_times=all_recipe_df['cooking_time'].tolist())
+    print(f"Generated Chart: {chart[:100]}...")  # Print only the first 100 characters of the chart
 
     context = {
         'form': form,
