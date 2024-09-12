@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from .models import Recipe
 from .forms import RecipeSearchForm
 import pandas as pd
@@ -62,10 +63,16 @@ def recipe_list(request):
                 chart = get_chart(chart_type, all_recipe_df, labels=all_recipe_df['name'].tolist(), cooking_times=all_recipe_df['cooking_time'].tolist())
         print(f"Generated Chart: {chart[:100]}...")  # Print only the first 100 characters of the chart
 
+    # Pagination
+    paginator = Paginator(recipes, 10)  # Show 10 recipes per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
         'form': form,
-        'recipes': recipes,
+        'recipes': page_obj,  # Use the paginated recipes
         'recipe_df': recipe_df_html,
         'chart': chart,
+        'is_paginated': page_obj.has_other_pages(),  # Add pagination info to context
     }
     return render(request, "recipe/recipe_list.html", context)
