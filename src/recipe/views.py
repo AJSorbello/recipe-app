@@ -8,6 +8,7 @@ from .utils import get_recipe_from_id
 def home(request):
     return render(request, "recipe/home.html")
 
+@login_required
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     return render(request, "recipe/recipe_detail.html", {'recipe': recipe})
@@ -49,7 +50,7 @@ def recipe_list(request):
             recipe_df['recipe_id'] = recipe_df['id'].apply(get_recipe_from_id)
             # chart = get_chart(chart_type, recipe_df, labels=recipe_df['recipe_id'].values)
             recipe_df = recipe_df.to_html()
-
+            print(f"DataFrame HTML: {recipe_df}")
     context = {
         'form': form,
         'recipes': recipes,

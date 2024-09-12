@@ -36,9 +36,9 @@
         {% if error_message %}
           <div class="alert alert-danger mt-3">{{ error_message }}</div>
         {% endif %}
-        {% if recipes_df %}
+        {% if recipe_df %}
           <h2>Search Results</h2>
-          {{ recipes_df|safe }}
+          {{ recipe_df|safe }}
           <br>
           <img src="data:image/png;base64,{{ chart|safe }}">
         {% else %}
