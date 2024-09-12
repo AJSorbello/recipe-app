@@ -4,12 +4,11 @@ import base64
 import matplotlib.pyplot as plt
 
 # Define a function that takes the ID
-def get_recipe_from_id(val):
+def get_recipe_from_id(recipe_id):
+    # Example implementation
     try:
-        # This ID is used to retrieve the name from the record
-        recipe_name = Recipe.objects.get(id=val).name
-        # And the name is returned back
-        return recipe_name
+        recipe = Recipe.objects.get(id=recipe_id)
+        return recipe.name
     except Recipe.DoesNotExist:
         return "Unknown Recipe"
 
@@ -50,19 +49,19 @@ def get_chart(chart_type, data, **kwargs):
 
     # Select chart_type based on user input from the form
     if chart_type == '#1':
-        # Plot bar chart between date on x-axis and quantity on y-axis
-        plt.bar(data['date_created'], data['quantity'])
+        # Plot bar chart between recipe names on x-axis and cooking_time on y-axis
+        plt.bar(data['name'], data['cooking_time'])
         plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels
 
     elif chart_type == '#2':
-        # Generate pie chart based on the price.
+        # Generate pie chart based on the cooking_time.
         # The recipe names are sent from the view as labels
         labels = kwargs.get('labels')
-        plt.pie(data['price'], labels=labels)
+        plt.pie(data['cooking_time'], labels=labels)
 
     elif chart_type == '#3':
-        # Plot line chart based on date on x-axis and price on y-axis
-        plt.plot(data['date_created'], data['price'])
+        # Plot line chart based on recipe names on x-axis and cooking_time on y-axis
+        plt.plot(data['name'], data['cooking_time'])
         plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels
     else:
         print('unknown chart type')

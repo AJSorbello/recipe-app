@@ -7,7 +7,7 @@ class Recipe(models.Model):
         ("Hard", "Hard"),
     ]
 
-    name = models.CharField(max_length=120)
+    name = models.CharField(max_length=50)
     cooking_time = models.IntegerField(help_text="Cooking time in minutes")
     difficulty = models.CharField(max_length=50, choices=DIFFICULTY_CHOICES)
     description = models.TextField()
