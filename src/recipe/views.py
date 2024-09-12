@@ -18,6 +18,7 @@ def recipe_list(request):
     recipe_df_html = None  # Initialize recipe_df_html
     chart = None
     recipes = Recipe.objects.all()  # Default to all recipes
+    chart_type = None  # Initialize chart_type
 
     # Fetch all recipes for the chart
     all_recipes = Recipe.objects.all()
@@ -43,13 +44,15 @@ def recipe_list(request):
             print(f"DataFrame HTML: {recipe_df_html}")
 
     # Generate chart with all recipes
-    chart = get_chart(chart_type, all_recipe_df, labels=all_recipe_df['name'].tolist(), cooking_times=all_recipe_df['cooking_time'].tolist())
-    print(f"Generated Chart: {chart[:100]}...")  # Print only the first 100 characters of the chart
+    if chart_type:
+        chart = get_chart(chart_type, all_recipe_df, labels=all_recipe_df['name'].tolist(), cooking_times=all_recipe_df['cooking_time'].tolist())
+        print(f"Generated Chart: {chart[:100]}...")  # Print only the first 100 characters of the chart
 
     context = {
         'form': form,
         'recipes': recipes,
         'recipe_df': recipe_df_html,
         'chart': chart,
+        'chart_type': chart_type,
     }
     return render(request, "recipe/recipe_list.html", context)
