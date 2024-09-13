@@ -17,6 +17,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 from recipe_project.views import login_view, logout_view, logout_success_view
 from recipe.views import home  # Import the home view
 
@@ -28,3 +30,5 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('logout_success/', logout_success_view, name='logout_success'),  # Add the logout success URL pattern
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

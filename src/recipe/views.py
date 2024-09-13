@@ -18,11 +18,17 @@ def recipe_list(request):
     form = RecipeSearchForm(request.POST or None)
     recipe_df_html = None  # Initialize recipe_df_html
     chart = None
-    recipes = Recipe.objects.all()  # Default to all recipes
     chart_type = None  # Initialize chart_type
 
+    # Fetch all recipes and order them
+    recipes = Recipe.objects.all().order_by('name')  # Order by name or any other field
+    paginator = Paginator(recipes, 10)  # Show 10 recipes per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     # Fetch all recipes for the chart
-    all_recipes = Recipe.objects.all()
+    all_recipes = Recipe.objects.all().order_by('name')
     all_recipe_df = pd.DataFrame(list(all_recipes.values()))
     all_recipe_df['name'] = all_recipe_df['id'].apply(get_recipe_from_id)
 
@@ -33,12 +39,12 @@ def recipe_list(request):
         print(f"Search term: {recipe_title}, Chart type: {chart_type}, Show All: {show_all}")
         
         if show_all:
-            recipes = Recipe.objects.all()
+            recipes = Recipe.objects.all().order_by('name')
             recipe_df = pd.DataFrame(list(recipes.values()))
             recipe_df['name'] = recipe_df['id'].apply(get_recipe_from_id)
             recipe_df_html = recipe_df.to_html(index=False, columns=['id', 'name', 'cooking_time', 'difficulty'])
         else:
-            qs = Recipe.objects.filter(name__icontains=recipe_title)
+            qs = Recipe.objects.filter(name__icontains=recipe_title).order_by('name')
             print(f"Filtered QuerySet: {qs}")
 
             if qs.exists():
@@ -62,11 +68,6 @@ def recipe_list(request):
             else:
                 chart = get_chart(chart_type, all_recipe_df, labels=all_recipe_df['name'].tolist(), cooking_times=all_recipe_df['cooking_time'].tolist())
         print(f"Generated Chart: {chart[:100]}...")  # Print only the first 100 characters of the chart
-
-    # Pagination
-    paginator = Paginator(recipes, 10)  # Show 10 recipes per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
 
     context = {
         'form': form,
