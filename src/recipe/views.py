@@ -22,7 +22,7 @@ def recipe_list(request):
 
     # Fetch all recipes and order them
     recipes = Recipe.objects.all().order_by('name')  # Order by name or any other field
-    paginator = Paginator(recipes, 10)  # Show 10 recipes per page
+    paginator = Paginator(recipes, 15)  # Show 10 recipes per page
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
