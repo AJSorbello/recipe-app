@@ -9,6 +9,9 @@ from .utils import get_recipe_from_id, get_chart
 def home(request):
     return render(request, "recipe/home.html")
 
+def about(request):  # Add this view
+    return render(request, 'recipe/about.html')
+
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     recipes = list(Recipe.objects.all().order_by('name'))
