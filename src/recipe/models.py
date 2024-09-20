@@ -7,25 +7,23 @@ class Recipe(models.Model):
         ("Hard", "Hard"),
     ]
 
-    name = models.CharField(max_length=50)
-    cooking_time = models.IntegerField(help_text="Cooking time in minutes")
-    difficulty = models.CharField(max_length=50, choices=DIFFICULTY_CHOICES)
+    name = models.CharField(max_length=255)
     description = models.TextField()
-    instructions = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to="recipe_list/images/", null=True, blank=True)  # Image field
-
-    def __str__(self):
-        return str(self.name)  # Ensure it returns a string
+    instructions = models.TextField()
+    cooking_time = models.IntegerField()
+    difficulty = models.CharField(max_length=50, choices=DIFFICULTY_CHOICES)
 
     def calculate_difficulty(self):
         if self.cooking_time < 30:
             self.difficulty = "Easy"
-        elif self.cooking_time < 60:
+        elif 30 <= self.cooking_time <= 60:
             self.difficulty = "Medium"
         else:
             self.difficulty = "Hard"
-        self.save()
 
     def save(self, *args, **kwargs):
         self.calculate_difficulty()
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
