@@ -1,16 +1,18 @@
+{% extends 'base/base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Logout Successful</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h1>You’ve Successfully Logged Out</h1>
-        <p>Thank you for using our application. We hope to see you again soon!</p>
-        <a href="{% url 'login' %}">Log back in</a>
-        <p>Check out our <a href="{% url 'recipe:home' %}">home page</a> for more information.</p>
+
+{% block title %}Logout Successful{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="content">
+        <div class="about-container">
+            <h1>You’ve Successfully Logged Out</h1>
+            <p>Thank you for using our application. We hope to see you again soon!</p>
+            <a href="{% url 'login' %}" class="button">Log back in</a>
+            <p>Check out our <a href="{% url 'recipe:home' %}">home page</a> for more information.</p>
+        </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
