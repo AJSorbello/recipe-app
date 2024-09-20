@@ -1,15 +1,23 @@
+/* About Container Styles */
+.about-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px;
+    text-align: center;
+}
 /* General Styles */
 body {
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
     background: url('/static/site_images/welcome.jpg') no-repeat center center fixed;
     background-size: cover;
-    display: flex;
-    font-family: Arial, sans-serif;
-    justify-content: center;
-    margin: 0;
-    min-height: 100vh;
-    padding: 0;
-    padding-top: 80px; /* Adjust this value based on the height of your header */
 }
 
 .back-button-container, .navigation-buttons, .view-recipe-button-container {
@@ -56,7 +64,22 @@ button:hover {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    width: 100%;
 }
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Adjust the max-width as needed */
+    flex: 1;
+    margin: 0 auto;
+}
+
 
 /* Error Message Styles */
 .error {
@@ -64,13 +87,15 @@ button:hover {
     margin-bottom: 20px;
     text-align: center;
 }
+
 /* Footer Styles */
 footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 10px 0;
-    margin-top: auto;
+    width: 100%;
+    margin-top: auto; /* Ensure footer stays at the bottom */
 }
 
 /* Form Styles */
@@ -102,6 +127,9 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000; /* Ensure it stays on top of other content */
+    display: flex;
+    justify-content: space-between; /* Distribute space between items */
+    align-items: center; /* Center items vertically */
 }
 
 header h1 {
@@ -109,8 +137,13 @@ header h1 {
     font-size: 2.5em;
     margin: 0;
 }
+
+/* Main Section Styles */
 main {
     flex: 1;
+    width: 100%;
+    padding-bottom: 50px; /* Adjust this value based on the height of your footer */
+    padding-top: 80px; /* Adjust this value based on the height of your header */
 }
 
 /* Navigation Styles */
@@ -146,7 +179,6 @@ nav ul {
 nav ul li {
     margin: 0 15px;
 }
-
 
 nav ul li a {
     color: white;
@@ -251,6 +283,12 @@ nav ul li a.login-button {
     margin-top: 20px;
 }
 
+main {
+    flex: 1;
+    width: 100%;
+    padding-top: 80px; /* Adjust this value based on the height of your header */
+    padding-bottom: 50px; /* Adjust this value based on the height of your footer */
+}
 /* Main Section Styles */
 .main section .btn {
     background-color: #ff7f50;
@@ -313,7 +351,11 @@ nav ul li a.login-button {
     justify-content: space-between;
     margin-top: 20px;
 }
-
+.page-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 /* Recipe Card Styles */
 .recipe-card {
     background-color: white;
@@ -412,12 +454,14 @@ nav ul li a.login-button {
     max-width: 600px;
     padding: 20px;
 }
+
 .responsive-image {
     display: block;
     max-width: 100%;
     height: auto;
     margin: 20px auto;
 }
+
 /* Search Container Styles */
 .search-container {
     display: flex;
@@ -492,7 +536,6 @@ ul li {
     margin-bottom: 20px;
 }
 
-
 table {
     margin: 0 auto;
     border-collapse: collapse;
@@ -502,8 +545,6 @@ th, td {
     border: 1px solid black;
     padding: 5px;
 }
-
-
 
 /* Media Queries */
 @media (max-width: 768px) {
