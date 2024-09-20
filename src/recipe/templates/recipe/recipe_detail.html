@@ -1,85 +1,75 @@
+{% extends 'base/base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ recipe.name }}</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}" />
-  </head>
-  <body>
-    <header>
-      <h1>{{ recipe.name }}</h1>
-      <ul>
-        <nav>
-          <div class="hamburger" id="hamburger">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block page_title %}{{ recipe.name }}{% endblock %}
+
+{% block content %}
+<div class="welcome-container recipe-details">
+  <!-- Image Display -->
+  <div class="image-wrapper">
+    {% if recipe.image %}
+    <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" />
+    {% else %}
+    <img src="{% static 'default_recipe_image.jpg' %}" alt="Default Image" />
+    {% endif %}
+  </div>
+
+  <!-- Centered Cooking Time and Difficulty -->
+  <div class="recipe-meta">
+    <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+    <p>Difficulty: {{ recipe.difficulty }}</p>
+  </div>
+
+  <!-- Ingredients Container -->
+  <div class="ingredients-container">
+    <h3>Ingredients:</h3>
+    <ul>
+      {% for ingredient in recipe.ingredient_set.all %}
+      <li class="ingredient-item">
+        <div class="ingredient-wrapper">
+          <div class="ingredient-name-container">{{ ingredient.name }}</div>
+          <div class="ingredient-quantity-unit-container">
+            {{ ingredient.quantity }} {{ ingredient.unit }}
           </div>
-          <ul id="nav-links">
-            <a href="{% url 'recipe:home' %}">Home</a>
-            <a href="{% url 'recipe:recipe_list' %}">All Recipes</a>
-            {% if user.is_authenticated %}
-              <a href="{% url 'logout' %}">Logout</a>
-            {% endif %}
-          </ul>
-        </nav>
-    </header>
-    <div class="welcome-container recipe-details">
-      <!-- Image Display -->
-      <div class="image-wrapper">
-        {% if recipe.image %}
-        <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" />
-        {% else %}
-        <img
-          src="{% static 'default_recipe_image.jpg' %}"
-          alt="Default Image" />
-        {% endif %}
-      </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 
-      <!-- Centered Cooking Time and Difficulty -->
-      <div class="recipe-meta">
-        <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
-        <p>Difficulty: {{ recipe.difficulty }}</p>
-      </div>
+  <h3>Instructions:</h3>
+  <p>{{ recipe.instructions }}</p>
 
-      <!-- Ingredients Container -->
-      <div class="ingredients-container">
-        <h3>Ingredients:</h3>
-        <ul>
-          {% for ingredient in recipe.ingredient_set.all %}
-          <li class="ingredient-item">
-            <div class="ingredient-wrapper">
-              <div class="ingredient-name-container">{{ ingredient.name }}</div>
-              <div class="ingredient-quantity-unit-container">
-                {{ ingredient.quantity }} {{ ingredient.unit }}
-              </div>
-            </div>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
+  <!-- Navigation Buttons -->
+  <div class="navigation-buttons">
+    {% if previous_recipe %}
+      <a href="{% url 'recipe:recipe_detail' previous_recipe.pk %}" class="button arrow-button">
+        <i class="fas fa-arrow-left"></i> Previous Recipe
+      </a>
+    {% endif %}
+    {% if next_recipe %}
+      <a href="{% url 'recipe:recipe_detail' next_recipe.pk %}" class="button arrow-button">
+        Next Recipe <i class="fas fa-arrow-right"></i>
+      </a>
+    {% endif %}
+  </div>
 
-      <h3>Instructions:</h3>
-      <p>{{ recipe.instructions }}</p>
-
-      <!-- Back to All Recipes Button -->
-      <div class="back-button-container">
-        <a href="{% url 'recipe:recipe_list' %}" class="back-button"
-          >Back to All Recipes</a
-        >
-      </div>
-    </div>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          const hamburger = document.getElementById('hamburger');
-          const navLinks = document.getElementById('nav-links');
-      
-          hamburger.addEventListener('click', function() {
-              navLinks.classList.toggle('show');
-          });
+  <!-- Back to All Recipes Button -->
+  <div class="back-button-container">
+    <a href="{% url 'recipe:recipe_list' %}" class="button back-button">Back to All Recipes</a>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('nav-links');
+  
+      hamburger.addEventListener('click', function() {
+          navLinks.classList.toggle('show');
       });
-      </script>
-  </body>
-</html>
+  });
+</script>
+{% endblock %}

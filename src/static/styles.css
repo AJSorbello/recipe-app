@@ -1,19 +1,37 @@
-/* styles.css */
-
 /* General Styles */
 body {
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
     background: url('/static/site_images/welcome.jpg') no-repeat center center fixed;
     background-size: cover;
-    display: flex;
-    font-family: Arial, sans-serif;
-    justify-content: center;
-    margin: 0;
-    min-height: 100vh; /* Ensure the body takes up the full height of the viewport */
-    padding: 0;
 }
 
-.back-button {
+.back-button-container, .navigation-buttons, .view-recipe-button-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+button {
+    background: radial-gradient(circle, rgba(40,167,69,1) 0%, rgba(33,136,56,1) 100%);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* Button Hover Effect */
+button:hover {
+    background: radial-gradient(circle, rgba(33,136,56,1) 0%, rgba(40,167,69,1) 100%);
+}
+
+/* Button Styles */
+.button, .back-button, .arrow-button, .view-recipe-button {
     background-color: #ff7f50;
     border-radius: 10px;
     color: white;
@@ -26,42 +44,69 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.back-button:hover {
+.button:hover, .back-button:hover, .arrow-button:hover, .view-recipe-button:hover {
     background-color: #cc5200;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     transform: translateY(-5px);
 }
 
-.back-button-container {
-    margin-top: 30px;
-    text-align: center;
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    width: 100%;
 }
 
-button {
-    background: radial-gradient(circle, rgba(40,167,69,1) 0%, rgba(33,136,56,1) 100%);
-    border: none;
-    border-radius: 50px; /* Radial button */
-    color: #fff;
-    cursor: pointer;
-    margin-top: 20px; /* Add margin to separate from the input fields */
-    padding: 10px;
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Adjust the max-width as needed */
+    flex: 1;
+    margin: 0 auto;
 }
 
-button:hover {
-    background: radial-gradient(circle, rgba(33,136,56,1) 0%, rgba(40,167,69,1) 100%);
-}
 
+/* Error Message Styles */
 .error {
     color: red;
     margin-bottom: 20px;
     text-align: center;
 }
 
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    margin-top: auto; /* Ensure footer stays at the bottom */
+}
+
+/* Form Styles */
 form {
     display: flex;
     flex-direction: column;
 }
 
+h1, h3 {
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+
+h3 {
+    color: #ff7f50;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+/* Header Styles */
 header {
     background-color: #ff7f50;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -72,6 +117,9 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000; /* Ensure it stays on top of other content */
+    display: flex;
+    justify-content: space-between; /* Distribute space between items */
+    align-items: center; /* Center items vertically */
 }
 
 header h1 {
@@ -80,19 +128,28 @@ header h1 {
     margin: 0;
 }
 
-header nav {
+/* Main Section Styles */
+main {
+    flex: 1;
+    width: 100%;
+    padding-bottom: 50px; /* Adjust this value based on the height of your footer */
+    padding-top: 80px; /* Adjust this value based on the height of your header */
+}
+
+/* Navigation Styles */
+nav {
     align-items: center;
     display: flex;
     justify-content: space-between;
 }
 
-header nav .hamburger {
+nav .hamburger {
     cursor: pointer;
     display: none;
     flex-direction: column;
 }
 
-header nav .hamburger .bar {
+nav .hamburger .bar {
     background-color: white;
     height: 3px;
     margin: 4px 0;
@@ -100,52 +157,99 @@ header nav .hamburger .bar {
     width: 25px;
 }
 
-header nav ul {
-    display: flex;
-    gap: 20px; /* Space between the links */
-    justify-content: center;
-    list-style: none;
-    margin: 20px 0 0 0; /* Add margin to separate from the header title */
+nav ul {
+    list-style-type: none;
+    margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
-header nav ul li {
-    display: inline;
+/* Navigation Link Styles */
+nav ul li {
+    margin: 0 15px;
 }
 
-header nav ul li a {
-    border-radius: 5px; /* Add border radius for rounded corners */
-    color: white; /* Change to white for better contrast */
-    font-weight: bold;
-    padding: 10px 15px; /* Add padding for better click area */
+nav ul li a {
+    color: white;
     text-decoration: none;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    padding: 5px 10px;
 }
 
-header nav ul li a:hover {
-    background-color: #007BFF; /* Change background color on hover */
-    color: white; /* Ensure text remains white on hover */
+nav ul li a:hover,
+nav ul li a.login-button {
+    background-color: #007bff;
+    border-radius: 5px;
 }
 
-.h1 {
-    color: #333;
+/* Image Styles */
+.image-wrapper img {
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    border: 5px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Ingredient Container Styles */
+.ingredient-details {
+    font-size: 1.1em;
+    font-weight: bold;
     text-align: center;
 }
 
-.h3 {
-    color: #ff7f50;
-    font-size: 1.5em;
-    margin-bottom: 15px;
+.ingredient-item {
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+
+.ingredient-name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.ingredient-name-container {
+    flex-grow: 2;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 10px;
+    text-align: left;
+}
+
+.ingredient-quantity::before {
+    content: "Quantity: ";
+}
+
+.ingredient-quantity-unit-container {
+    flex-grow: 1;
+    font-size: 1.1em;
+    text-align: right;
+}
+
+.ingredient-unit::before {
+    content: "Unit: ";
+}
+
+.ingredient-wrapper {
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px 10px 20px;
+    padding: 10px;
 }
 
 .ingredients-container {
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque background for better readability */
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow for more visibility */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
     margin-left: auto;
-    margin-right: auto; /* Center the container horizontally */
-    max-width: 800px; /* Optional: Set a max-width for the container */
+    margin-right: auto;
+    max-width: 800px;
     padding: 15px;
 }
 
@@ -153,74 +257,29 @@ header nav ul li a:hover {
     color: #333;
     font-size: 1.3em;
     margin-bottom: 10px;
-    text-align: center; /* Center the title */
+    text-align: center;
 }
 
 .ingredients-container ul {
     color: #333;
     font-size: 1.1em;
-    list-style-type: none; /* Remove default bullet points */
+    list-style-type: none;
     margin: 0;
-    padding-left: 0; /* Remove padding since we don't need bullets */
+    padding-left: 0;
 }
 
-.ingredient-item {
-    margin-bottom: 20px; /* Space between each ingredient */
-    padding-left: 0; /* Align to the left edge */
+.logout-button {
+    display: inline-block;
+    margin-top: 20px;
 }
 
-.ingredient-name-container {
-    flex-grow: 2; /* Make the name container take more space */
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-right: 10px; /* Space between name and quantity/unit */
-    text-align: left; /* Align text to the left */
+main {
+    flex: 1;
+    width: 100%;
+    padding-top: 80px; /* Adjust this value based on the height of your header */
+    padding-bottom: 50px; /* Adjust this value based on the height of your footer */
 }
-
-.ingredient-quantity-unit-container {
-    flex-grow: 1; /* Allow this container to take less space */
-    font-size: 1.1em;
-    text-align: right; /* Align text to the right */
-}
-
-.ingredient-wrapper {
-    background-color: #f9f9f9; /* Light background for the ingredient wrapper */
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-    display: flex; /* Flexbox to align name and quantity/unit containers */
-    justify-content: space-between; /* Space out the name and quantity/unit */
-    margin: 0 20px 10px 20px; /* Add left and right margin for inner spacing */
-    padding: 10px;
-}
-
-.ingredient-details {
-    font-size: 1.1em;
-    font-weight: bold;
-    text-align: center; /* Center the text */
-}
-
-.ingredient-name,
-.ingredient-quantity,
-.ingredient-unit {
-    flex-basis: 100%; /* Each element takes full width on small screens */
-    font-weight: normal;
-    margin-bottom: 5px;
-    text-align: center; /* Center the text */
-}
-
-.ingredient-name {
-    font-size: 1.2em;
-    font-weight: bold; /* Make the name stand out */
-}
-
-.ingredient-quantity::before {
-    content: "Quantity: ";
-}
-
-.ingredient-unit::before {
-    content: "Unit: ";
-}
-
+/* Main Section Styles */
 .main section .btn {
     background-color: #ff7f50;
     border-radius: 5px;
@@ -240,12 +299,61 @@ header nav ul li a:hover {
     margin-bottom: 30px;
 }
 
+/* Media Queries */
+@media (max-width: 768px) {
+    header nav .hamburger {
+        display: flex;
+    }
+
+    header nav ul {
+        background-color: #ff7f50;
+        display: none;
+        flex-direction: column;
+        left: 0;
+        position: absolute;
+        text-align: center;
+        top: 60px;
+        width: 100%;
+        z-index: 999;
+    }
+
+    header nav ul li {
+        margin: 10px 0;
+    }
+
+    header nav ul.show {
+        display: flex;
+    }
+}
+
+@media (min-width: 600px) {
+    .ingredient-quantity,
+    .ingredient-unit,
+    .ingredient-name {
+        flex-basis: auto; /* Revert to auto width on larger screens */
+        text-align: left; /* Align text to the left on larger screens */
+    }
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.page-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+/* Recipe Card Styles */
 .recipe-card {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
+    transition: transform 0.3s ease;
 }
 
 .recipe-card:hover {
@@ -253,7 +361,7 @@ header nav ul li a:hover {
 }
 
 .recipe-card .image-wrapper {
-    height: 300px; /* Fixed height for all images */
+    height: 300px;
     overflow: hidden;
     width: 100%;
 }
@@ -273,20 +381,21 @@ header nav ul li a:hover {
 }
 
 .recipe-card img {
-    height: 100%; /* Ensure the image fills the wrapper */
-    object-fit: cover; /* Maintain aspect ratio and cover the area */
+    height: 100%;
+    object-fit: cover;
     width: 100%;
 }
 
+/* Recipe Details Styles */
 .recipe-details {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
-    margin-top: 100px; /* Add top margin to move content down from the navbar */
+    margin-top: 100px;
     max-width: 800px;
     padding: 20px;
-    padding-top: 120px; /* Add top padding to clear the fixed header */
+    padding-top: 120px;
 }
 
 .recipe-details .image-wrapper {
@@ -325,21 +434,30 @@ header nav ul li a:hover {
     text-align: center;
 }
 
+/* Recipes List Styles */
 .recipes-list {
     display: flex;
-    flex-direction: column; /* Stack recipes vertically */
+    flex-direction: column;
     gap: 20px;
     justify-content: center;
-    margin: 0 auto; /* Center the list on the page, with top margin for header */
-    max-width: 600px; /* Center column width */
+    margin: 0 auto;
+    max-width: 600px;
     padding: 20px;
 }
 
+.responsive-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+}
+
+/* Search Container Styles */
 .search-container {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
-    margin-top: 80px; /* Fixed margin to ensure the search bar is below the header */
+    margin-top: 80px;
 }
 
 .search-form {
@@ -347,6 +465,7 @@ header nav ul li a:hover {
     width: 100%;
 }
 
+/* Unordered List Styles */
 ul {
     list-style-type: disc;
     padding-left: 20px;
@@ -358,10 +477,11 @@ ul li {
     margin-bottom: 10px;
 }
 
+/* View Recipe Button Styles */
 .view-recipe-button {
     background-color: #ff7f50;
     border-radius: 10px;
-    color: white !important; /* Force the text to be white in all states */
+    color: white !important;
     display: inline-block;
     font-size: 1.2em;
     font-weight: bold;
@@ -406,6 +526,17 @@ ul li {
     margin-bottom: 20px;
 }
 
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
     header nav .hamburger {
         display: flex;

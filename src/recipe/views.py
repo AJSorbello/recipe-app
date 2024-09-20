@@ -11,7 +11,18 @@ def home(request):
 
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
-    return render(request, "recipe/recipe_detail.html", {'recipe': recipe})
+    recipes = list(Recipe.objects.all().order_by('name'))
+    current_index = recipes.index(recipe)
+    
+    previous_recipe = recipes[current_index - 1] if current_index > 0 else None
+    next_recipe = recipes[current_index + 1] if current_index < len(recipes) - 1 else None
+    
+    context = {
+        'recipe': recipe,
+        'previous_recipe': previous_recipe,
+        'next_recipe': next_recipe,
+    }
+    return render(request, "recipe/recipe_detail.html", context)
 
 @login_required
 def recipe_list(request):
@@ -22,7 +33,7 @@ def recipe_list(request):
 
     # Fetch all recipes and order them
     recipes = Recipe.objects.all().order_by('name')  # Order by name or any other field
-    paginator = Paginator(recipes, 15)  # Show 10 recipes per page
+    paginator = Paginator(recipes, 15)  # Show 15 recipes per page
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
