@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Recipe(models.Model):
     DIFFICULTY_CHOICES = [
         ("Easy", "Easy"),
@@ -12,8 +13,8 @@ class Recipe(models.Model):
     instructions = models.TextField()
     cooking_time = models.IntegerField()
     difficulty = models.CharField(max_length=50, choices=DIFFICULTY_CHOICES)
-    
-    image = models.ImageField(upload_to='recipe_list/images/', null=True, blank=True)
+
+    image = models.ImageField(upload_to="recipe_list/images/", null=True, blank=True)
 
     def calculate_difficulty(self):
         if self.cooking_time < 30:
