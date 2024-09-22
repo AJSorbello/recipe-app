@@ -14,7 +14,9 @@
     <form action="" method="POST">
         {% csrf_token %}
         {{ form }}
-        <button type="submit">Login</button>
+        <div class="center-button">
+            <button type="submit" class="small-button">Login</button>
+        </div>
     </form>
 </div>
 {% endblock %}
