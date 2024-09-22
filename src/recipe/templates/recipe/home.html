@@ -12,7 +12,9 @@
     <section>
       <p>Discover and share amazing recipes from around the world!</p>
       {% if user.is_authenticated %}
-        <a href="{% url 'recipe:recipe_list' %}" class="btn">View Recipes</a>
+        <div class="center-button">
+          <a href="{% url 'recipe:recipe_list' %}" class="small-button">View Recipes</a>
+        </div>
       {% else %}
         <p>Please <a href="{% url 'login' %}">log in</a> to view recipes.</p>
       {% endif %}
