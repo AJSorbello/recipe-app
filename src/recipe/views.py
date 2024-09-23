@@ -16,10 +16,10 @@ def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     recipes = list(Recipe.objects.all().order_by('name'))
     current_index = recipes.index(recipe)
-    
+
     previous_recipe = recipes[current_index - 1] if current_index > 0 else None
     next_recipe = recipes[current_index + 1] if current_index < len(recipes) - 1 else None
-    
+
     context = {
         'recipe': recipe,
         'previous_recipe': previous_recipe,
@@ -51,7 +51,7 @@ def recipe_list(request):
         chart_type = request.POST.get('chart_type')
         show_all = request.POST.get('show_all')
         print(f"Search term: {recipe_title}, Chart type: {chart_type}, Show All: {show_all}")
-        
+
         if show_all:
             recipes = Recipe.objects.all().order_by('name')
             recipe_df = pd.DataFrame(list(recipes.values()))

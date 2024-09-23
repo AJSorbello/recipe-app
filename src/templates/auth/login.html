@@ -1,38 +1,20 @@
+{% extends 'base/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}" />
-  </head>
-  <body>
-    <div class="welcome-container">
-      <header>
-        <h1>Login</h1>
-      </header>
-      <main>
-        {% comment %} check for error message {% endcomment %}
-        {% if error_message %}
-          <div class="error">{{ error_message }}</div>
-        {% endif %}
-        
-        {% comment %} print form {% endcomment %}
-        <form action="" method="POST">
-          {% comment %} add Django security token {% endcomment %}
-          {% csrf_token %}
-          
-          {% comment %} print form received from view {% endcomment %}
-          {{ form }}
-          
-          {% comment %} add button {% endcomment %}
-          <button type="submit">Login</button>
-        </form>
-      </main>
-      <footer>
-        <p>&copy; 2024 My Recipe App. All rights reserved.</p>
-      </footer>
-    </div>
-  </body>
-</html>
+
+{% block title %}Login{% endblock %}
+
+{% block page_title %}Login{% endblock %}
+
+{% block content %}
+<div class="welcome-container">
+    {% if error_message %}
+        <div class="error">{{ error_message }}</div>
+    {% endif %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}

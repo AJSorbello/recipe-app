@@ -59,7 +59,30 @@ button:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     transform: translateY(-5px);
 }
+.center-button {
+    display: flex;
+    justify-content: center;
+}
 
+/* Small Button */
+.small-button {
+    width: 100px; /* Increased width */
+    padding: 8px 15px; /* Adjusted padding */
+    font-size: 1em; /* Slightly larger font size */
+    border-radius: 5px;
+    background-color: #ff7f50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.small-button:hover {
+    background-color: #cc5200;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+}
 .content {
     flex: 1;
     display: flex;
