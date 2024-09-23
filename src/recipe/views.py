@@ -21,13 +21,10 @@ def recipe_detail(request, pk):
     current_index = recipes.index(recipe)
 
     previous_recipe = recipes[current_index - 1] if current_index > 0 else None
-<<<<<<< HEAD
     next_recipe = recipes[current_index + 1] if current_index < len(recipes) - 1 else None
-=======
     next_recipe = (
         recipes[current_index + 1] if current_index < len(recipes) - 1 else None
     )
->>>>>>> fad7b0ec63e48a50d3a39c5d8f93c4537c238b3b
 
     context = {
         "recipe": recipe,
@@ -54,7 +51,7 @@ def recipe_list(request):
     # Fetch all recipes for the chart
     all_recipes = Recipe.objects.all().order_by("name")
     all_recipe_df = pd.DataFrame(list(all_recipes.values()))
-<<<<<<< HEAD
+
     all_recipe_df['name'] = all_recipe_df['id'].apply(get_recipe_from_id)
 
     if request.method == 'POST':
@@ -62,7 +59,6 @@ def recipe_list(request):
         chart_type = request.POST.get('chart_type')
         show_all = request.POST.get('show_all')
         print(f"Search term: {recipe_title}, Chart type: {chart_type}, Show All: {show_all}")
-=======
     all_recipe_df["name"] = all_recipe_df["id"].apply(get_recipe_from_id)
 
     if request.method == "POST":
@@ -72,7 +68,6 @@ def recipe_list(request):
         print(
             f"Search term: {recipe_title}, Chart type: {chart_type}, Show All: {show_all}"
         )
->>>>>>> fad7b0ec63e48a50d3a39c5d8f93c4537c238b3b
 
         if show_all:
             recipes = Recipe.objects.all().order_by("name")
