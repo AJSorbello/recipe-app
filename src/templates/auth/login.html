@@ -10,11 +10,21 @@
     {% if error_message %}
         <div class="error">{{ error_message }}</div>
     {% endif %}
+<<<<<<< HEAD
 
     <form action="" method="POST">
         {% csrf_token %}
         {{ form }}
         <button type="submit">Login</button>
+=======
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <div class="center-button">
+            <button type="submit" class="small-button">Login</button>
+        </div>
+>>>>>>> fad7b0ec63e48a50d3a39c5d8f93c4537c238b3b
     </form>
 </div>
 {% endblock %}
