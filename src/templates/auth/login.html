@@ -15,7 +15,7 @@
         <button id="demo-login-btn" class="demo-button" type="button">Use Demo Account</button>
     </div>
     
-    <form action="" method="POST">
+    <form action="" method="POST" id="login-form">
         {% csrf_token %}
         <div class="form-group">
             <label for="id_username">Username:</label>
@@ -36,18 +36,23 @@
         const demoButton = document.getElementById('demo-login-btn');
         const usernameField = document.getElementById('id_username');
         const passwordField = document.getElementById('id_password');
+        const loginForm = document.getElementById('login-form');
         
         demoButton.addEventListener('click', function() {
+            // Change button appearance to indicate action
+            demoButton.textContent = 'Logging in...';
+            demoButton.classList.add('demo-applied');
+            demoButton.disabled = true;
+            
             // Fill in the demo credentials
             usernameField.value = 'user';
             passwordField.value = 'password';
             
-            // Optional: add a visual feedback that fields were filled
-            demoButton.textContent = 'Demo Credentials Applied';
-            demoButton.classList.add('demo-applied');
-            
-            // Focus on the login button
-            document.querySelector('button[type="submit"]').focus();
+            // Brief timeout to show the "Logging in..." state
+            setTimeout(function() {
+                // Submit the form automatically
+                loginForm.submit();
+            }, 300);
         });
     });
 </script>
@@ -96,6 +101,10 @@
     
     .demo-button:active {
         transform: translateY(0);
+    }
+    
+    .demo-button:disabled {
+        cursor: default;
     }
     
     .demo-applied {
