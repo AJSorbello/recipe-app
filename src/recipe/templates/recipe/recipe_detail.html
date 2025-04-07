@@ -41,35 +41,134 @@
   </div>
 
   <h3>Instructions:</h3>
-  <p>{{ recipe.instructions }}</p>
-
-  <!-- Navigation Buttons -->
-  <div class="navigation-buttons">
-    {% if previous_recipe %}
-      <a href="{% url 'recipe:recipe_detail' previous_recipe.pk %}" class="button arrow-button">
-        <i class="fas fa-arrow-left"></i> Previous Recipe
-      </a>
-    {% endif %}
-    {% if next_recipe %}
-      <a href="{% url 'recipe:recipe_detail' next_recipe.pk %}" class="button arrow-button">
-        Next Recipe <i class="fas fa-arrow-right"></i>
-      </a>
-    {% endif %}
+  <div class="instructions-container">
+    <!-- We'll use JavaScript to format the instructions as steps -->
+    <ol id="instructions-list" class="instructions-list">
+      <li class="instruction-step">{{ recipe.instructions }}</li>
+    </ol>
   </div>
 
-  <!-- Back to All Recipes Button -->
-  <div class="back-button-container">
-    <a href="{% url 'recipe:recipe_list' %}" class="button back-button">Back to All Recipes</a>
+  <!-- Navigation Buttons Container -->
+  <div class="buttons-wrapper">
+    <!-- Previous/Next Navigation -->
+    <div class="button-container">
+      {% if previous_recipe %}
+        <a href="{% url 'recipe:recipe_detail' previous_recipe.pk %}" class="nav-button">
+          <i class="fas fa-arrow-left"></i> Previous Recipe
+        </a>
+      {% else %}
+        <div class="nav-button-placeholder"></div>
+      {% endif %}
+      
+      {% if next_recipe %}
+        <a href="{% url 'recipe:recipe_detail' next_recipe.pk %}" class="nav-button">
+          Next Recipe <i class="fas fa-arrow-right"></i>
+        </a>
+      {% else %}
+        <div class="nav-button-placeholder"></div>
+      {% endif %}
+    </div>
+
+    <!-- Back to All Recipes Button -->
+    <div class="back-button-container">
+      <a href="{% url 'recipe:recipe_list' %}" class="nav-button">Back to All Recipes</a>
+    </div>
   </div>
 </div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-      const hamburger = document.getElementById('hamburger');
-      const navLinks = document.getElementById('nav-links');
-  
-      hamburger.addEventListener('click', function() {
-          navLinks.classList.toggle('show');
+    // Format instructions as steps
+    const instructionsText = "{{ recipe.instructions|escapejs }}";
+    const steps = instructionsText.split('.');
+    const instructionsList = document.getElementById('instructions-list');
+    
+    if (instructionsList) {
+      // Clear any existing content
+      instructionsList.innerHTML = '';
+      
+      // Add each step as a list item
+      steps.forEach(step => {
+        const trimmedStep = step.trim();
+        if (trimmedStep.length > 0) {
+          const li = document.createElement('li');
+          li.className = 'instruction-step';
+          li.textContent = trimmedStep + '.';
+          instructionsList.appendChild(li);
+        }
       });
+    }
+
+    // Adjust button container if needed
+    const buttonContainer = document.querySelector('.button-container');
+    if (buttonContainer && buttonContainer.children.length === 1) {
+      buttonContainer.classList.add('single-button');
+    }
   });
 </script>
+
+<style>
+  .instructions-container {
+    text-align: left;
+    margin: 0 auto;
+    max-width: 90%;
+  }
+  
+  .instructions-list {
+    padding-left: 30px;
+  }
+  
+  .instruction-step {
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+  
+  .buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 30px 0;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+  }
+  
+  .nav-button {
+    background-color: #ff7f50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    min-width: 160px;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-button:hover {
+    background-color: #ff6b3d;
+  }
+  
+  .nav-button-placeholder {
+    min-width: 160px;
+  }
+  
+  .single-button {
+    justify-content: center;
+  }
+  
+  .back-button-container {
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+  }
+</style>
 {% endblock %}
