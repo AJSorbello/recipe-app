@@ -119,6 +119,31 @@ footer {
     padding: 10px 0;
     width: 100%;
     margin-top: auto; /* Ensure footer stays at the bottom */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.back-to-top {
+    background-color: #ff7f50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.back-to-top:hover {
+    background-color: #ff6b3d;
+    transform: translateY(-2px);
+}
+
+.back-to-top:active {
+    transform: translateY(0);
 }
 
 /* Form Styles */

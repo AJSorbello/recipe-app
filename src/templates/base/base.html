@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 </head>
-<body>
+<body id="top">
     <div class="page-container">
         <header>
             <h1>{% block page_title %}Recipe App{% endblock %}</h1>
@@ -36,6 +36,7 @@
     </div>
     <footer>
         <p>&copy; 2024 Recipe App</p>
+        <a href="#top" class="back-to-top">↑ Back to Top</a>
     </footer>
 </body>
 </html>
