@@ -11,6 +11,15 @@
         <div class="error">{{ error_message }}</div>
     {% endif %}
     
+    <div class="credentials-box">
+        <h3>Demo Access</h3>
+        <div class="credentials-info">
+            <p><span class="credential-label">Username:</span> <span class="credential-value">user</span></p>
+            <p><span class="credential-label">Password:</span> <span class="credential-value">password</span></p>
+        </div>
+        <p class="credentials-msg">Feel free to browse our delicious recipes!</p>
+    </div>
+    
     <form action="" method="POST">
         {% csrf_token %}
         {{ form }}
@@ -19,4 +28,60 @@
         </div>
     </form>
 </div>
+
+<style>
+    .credentials-box {
+        background: rgba(255, 127, 80, 0.1);
+        border: 2px dashed #ff7f50;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: pulse 2s infinite;
+    }
+    
+    .credentials-box h3 {
+        color: #ff7f50;
+        margin-top: 0;
+        font-size: 1.4em;
+    }
+    
+    .credentials-info {
+        background: white;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 10px 0;
+        display: inline-block;
+        min-width: 60%;
+    }
+    
+    .credential-label {
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .credential-value {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 2px 8px;
+        margin-left: 5px;
+        font-family: monospace;
+        font-size: 1.1em;
+        color: #ff7f50;
+    }
+    
+    .credentials-msg {
+        font-style: italic;
+        margin-top: 10px;
+        color: #555;
+    }
+    
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(255, 127, 80, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(255, 127, 80, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 127, 80, 0); }
+    }
+</style>
 {% endblock %}
